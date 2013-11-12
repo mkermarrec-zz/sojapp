@@ -5,4 +5,3 @@ require:
     - play -> crud
     - play -> secure
     - play -> externalconfig 0.2
-    - play -> table 1.2.2

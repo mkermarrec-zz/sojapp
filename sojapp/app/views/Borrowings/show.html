@@ -7,7 +7,7 @@
 
     <div class="objectForm">
         #{form action:@save(object._key()), enctype:'multipart/form-data'}
-        #{crud.form /}
+        #{crud.form games:games, source:"show" /}
         <p class="crudButtons">
             <input type="submit" name="_saveAndContinue" value="&{'crud.saveAndContinue', type.modelName}"/>
             <input type="submit" name="_save" value="&{'crud.save', type.modelName}"/>

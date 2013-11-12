@@ -14,7 +14,7 @@
 
         #{crud.custom 'isBorrowed'}
         #{if object.isBorrowed() }
-        <span style="color:red;font-weight: bold;">Emprunté</span>
+        <span style="color:red;font-weight: bold;">Emprunté #{secure.check 'admin'} par object.#{/secure.check}</span>
         #{/if}
         #{else}
         Disponible

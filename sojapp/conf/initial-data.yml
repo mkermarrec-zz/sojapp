@@ -1,17 +1,17 @@
-User(Matt):
-    firstName: Mathieu
-    lastName: Kermarrec
-    login: kermama
-    password: secret
-    admin: true
-    
 User(Toto):
     firstName: Toto
     lastName: Toto
     login: toto
     password: secret
     admin: false
-    
+
+User(Matt):
+    firstName: Mathieu
+    lastName: Kermarrec
+    login: kermama
+    password: secret
+    admin: true
+
 Game(7):
     title: 7 Wonders
     price: 45.0
@@ -31,7 +31,7 @@ Game(a):
     nbPlayerMax: 6
     nbPlayerMin: 2
     duration: 60
-    
+
 Borrowing(b0):
     player: Matt
     game: 7
