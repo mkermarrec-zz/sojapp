@@ -1,0 +1,75 @@
+# You can specialize this file for each language.
+# For example, for French create a messages.fr file
+#
+
+#
+# Admin
+#
+crud.show.title=Modifier %s
+crud.list.title=Liste des %s
+crud.delete=Supprimer %s
+crud.add=Ajouter %s
+crud.blank.title=Ajouter %s
+crud.save=Sauver
+crud.saveAndContinue=Appliquer
+crud.saveAndAddAnother=Sauver et nouveau
+crud.help.required=Obligatoire
+crud.help.email=Adresse email valide
+crud.help.dateformat=Date au format %s
+crud.help.numeric=Numérique
+crud.selectValue=(Sélectionner une valeur)
+
+#
+# Fiche admin jeu
+#
+title=Titre
+price=Prix
+boughtOn=Acheté le
+description=Description
+nbPlayerMax=Nombre de joueurs maximum
+nbPlayerMin=Nombre de joueurs minimum
+duration=Durée
+picture=Image
+
+#
+# Fiche admin emprunt
+#
+borrowingDate=Date d'emprunt
+returnDate=Date de retour
+complete=Le jeu est-il complet ?
+comments=Commentaires
+player=Joueur
+game=Jeu
+
+#
+# Fiche admin joueur
+#
+firstName=Prénom
+lastName=Nom
+email=Email
+login=Identifiant
+password=Mot de passe
+cotisationDate=Dernière cotisation
+guarantee=Montant de la caution
+admin=Administrateur?
+
+
+#
+# Page de login
+#
+secure.username=Identifiant
+secure.password=Mot de passe
+secure.signin=Se connecter
+
+#
+# Liens admin
+#
+Borrowings=Emprunts
+Games=Jeux
+Users=Joueurs
+
+#
+# Liste des jeux
+# 
+crud.search=Rechercher
+isBorrowed=Etat

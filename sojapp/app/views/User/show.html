@@ -1,0 +1,25 @@
+#{extends 'CRUD/layout.html' /}
+#{set 'moreStyles'}
+<link rel="stylesheet" type="text/css" media="screen"
+      href="@{'/public/stylesheets/crud.css'}"/>
+#{/set}
+
+<form action="@{User.save()}">
+    <div id="crud">
+        <h1>${user.firstName}</h1>
+
+        <div>
+            <h2>Email:</h2>
+            <input type="text" name="email" value="${user.email}" size="50"/>
+        </div>
+        <div>
+            <h2>Nouveau mot de passe:</h2>
+            <input type="password" name="password" size="50"/>
+        </div>
+        <div>
+            <h2>Resaisir mot de passe:</h2>
+            <input type="password" name="passwordbis" size="50"/>
+        </div>
+    </div>
+    <div><input type="submit" name="Sauver"></div>
+</form>

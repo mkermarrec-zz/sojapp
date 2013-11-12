@@ -1,0 +1,47 @@
+#{extends 'CRUD/layout.html' /} #{set 'moreStyles'}
+<link rel="stylesheet" type="text/css" media="screen"
+      href="@{'/public/stylesheets/crud.css'}"/>
+#{/set}
+
+<div id="crud">
+
+    #{if game.isBorrowed()}
+    <div
+            style="background-color: white; font-weight: bold; color: blue; text-align: center; height: 30px; line-height: 30px; font-size: 15px;">
+        Emprunté
+    </div>
+    #{/if}
+    <div
+            style="margin-top: 10px; display: inline-block; text-align: left;">
+        <img src="@{Game.showImage(game.id)}" alt="${game.picture.getUUID()}"
+             height="300px" width="300px"/>
+    </div>
+    <div
+            style="display: inline-block; text-align: left; margin-left: 20px; vertical-align: top; width:60%;margin-top: 10px;">
+        <h1>${game.title}</h1>
+
+        <div style="display: inline-block; width:200px;">
+            <img src="@{'/public/images/players.png'}" width="90px" height="50px" style="vertical-align:middle;">
+            <span style="margin-left: 20px;vertical-align: middle;font-weight: bold;">${game.nbPlayerMin} - ${game.nbPlayerMax} joueurs</span>
+        </div>
+        <div style="display: inline-block;padding-left:30px;">
+            <img src="@{'/public/images/clock.png'}" width="50px" height="50px" style="vertical-align:middle;">
+            <span style="margin-left: 20px;vertical-align: middle;font-weight: bold;">${game.duration} minutes</span>
+        </div>
+        #{secure.check "admin"}
+        <div>
+            <h3>Date d'achat:</h3>
+            ${game.getBoughtOn()}
+        </div>
+        <div>
+            <h3>Prix:</h3>
+            ${game.price} €
+        </div>
+        #{/secure.check}
+        <div style="margin-top: 30px;">
+            <h3>Description:</h3>
+            <span style="font-size: 16px;">${game.description}</span>
+        </div>
+    </div>
+
+</div>

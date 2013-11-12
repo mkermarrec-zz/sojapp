@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SOJ</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    #{get 'moreStyles' /}
+    <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/main.css'}"/>
+    <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}"/>
+    <script src="@{'/public/javascripts/jquery-1.4.2.min.js'}"></script>
+    <script src="@{'/public/javascripts/jquery.tools-1.2.5.toolbox.expose.min.js'}"></script>
+</head>
+
+
+<body id="admin">
+
+<div id="header">
+    <div id="logo">
+        SiiOnJouait #{secure.check 'admin'}<span>Administration</span>#{/secure.check}
+    </div>
+    <ul id="tools">
+        <li><a href="@{User.show()}">${session.get("usr")}</a> | <a href="@{Secure.logout()}">Deconnexion</a></li>
+    </ul>
+</div>
+
+<div id="main">
+
+    <ul id="adminMenu">
+        #{if session.get("isAdmin") == "true"}
+        <li class="${request.action.contains('Admin') ? 'selected' : ''}">
+            <a href="@{Admin.index()}">Accueil</a>
+        </li>
+        #{/if}
+        #{else}
+        <li class="${request.action.contains('Games') ? 'selected' : ''}">
+            <a href="@{Games.list()}">Accueil</a>
+        </li>
+        #{/else}
+        </li>
+        #{secure.check 'admin'}
+        <li class="${request.action.contains('Borrowings') ? 'selected' : ''}">
+            <a href="@{Borrowings.list()}">Emprunts</a>
+        </li>
+        <li class="${request.action.contains('Games') ? 'selected' : ''}"><a
+                href="@{Games.list()}">Jeux</a>
+        </li>
+        <li class="${request.action.contains('Users') ? 'selected' : ''}">
+            <a href="@{Users.list()}">Joueurs</a>
+        </li>
+        #{/secure.check}
+    </ul>
+
+    #{doLayout /}
+</div>
+</body>
+</html>
