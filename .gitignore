@@ -4,3 +4,11 @@
 *.jar
 *.war
 *.ear
+
+# SOJAPP #
+sojapp/tmp/*
+sojapp/modules/*
+.idea/*
+play.bat.stackdump
+sojapp/SOJ.iml
+sojapp/SOJ.ipr
