@@ -71,6 +71,20 @@ public class User extends Model {
     }
 
     /**
+     * build full name of user
+     *
+     * @return
+     */
+    public String getFullName() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(firstName);
+        sb.append(" ");
+        sb.append(lastName);
+
+        return sb.toString();
+    }
+
+    /**
      * @return the login
      */
     public String getLogin() {
