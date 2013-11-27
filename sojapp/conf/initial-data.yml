@@ -4,6 +4,7 @@ User(Toto):
     login: toto
     password: secret
     admin: false
+    email: toto@gmail.com
 
 User(Matt):
     firstName: Mathieu

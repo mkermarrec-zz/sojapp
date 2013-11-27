@@ -257,4 +257,18 @@ public class Game extends Model {
             file.delete();
         }
     }
+
+    /**
+     * @return
+     */
+    public String getBorrower() {
+        String result = null;
+
+        Borrowing borrowing = Borrowing.find("game.id = ? and complete = false order by borrowingDate desc", id).first();
+        if(borrowing != null) {
+            result = borrowing.getPlayer().getFullName();
+        }
+
+        return result;
+    }
 }
