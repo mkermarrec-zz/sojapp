@@ -10,15 +10,31 @@
     </div>
 
     <div id="crudListTable">
-        #{games.table fields:['title', 'isBorrowed']}
+        #{games.table fields:['title', 'isBorrowed', 'borrowingDate', 'expectedReturnDate'], sort:['title', 'isBorrowed', 'borrowingDate', 'expectedReturnDate']}
+
+        #{crud.custom 'title'}
+            <a href="/Game/show/${object.id}" style="font-weight: bold;">${object.title}</a>
+        #{/crud.custom}
 
         #{crud.custom 'isBorrowed'}
         #{if object.isBorrowed() }
-        <span style="color:red;font-weight: bold;">Emprunté #{secure.check 'admin'}par ${object.getBorrower()}#{/secure.check}</span>
+        <span style="color:red;font-weight: bold;">Emprunté #{secure.check 'admin'}par ${object.getBorrowing().getPlayer().getFullName()}#{/secure.check}</span>
         #{/if}
         #{else}
         Disponible
         #{/else}
+        #{/crud.custom}
+
+        #{crud.custom 'borrowingDate'}
+        #{if object.getBorrowing()}
+          <span style="font-weight: bold;">${object.getBorrowingDate().format('dd/MM/yyyy')}</span>
+        #{/if}
+        #{/crud.custom}
+
+        #{crud.custom 'expectedReturnDate'}
+        #{if object.getBorrowing()}
+          <span style="font-weight: bold;">${object.getExpectedReturnDate().format('dd/MM/yyyy')}</span>
+        #{/if}
         #{/crud.custom}
 
         #{/games.table}

@@ -7,6 +7,7 @@ import play.data.validation.Required;
 import play.db.jpa.Model;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import java.util.Date;
 
 /**
@@ -41,6 +42,9 @@ public class User extends Model {
     private double guarantee;
 
     private boolean admin;
+
+    @OneToOne
+    private Borrowing borrowing;
 
     /**
      * @return the fisrtName

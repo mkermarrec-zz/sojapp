@@ -1,4 +1,3 @@
-
 package models;
 
 import controllers.CRUD.Hidden;
@@ -11,6 +10,7 @@ import play.db.jpa.Model;
 
 import javax.persistence.Entity;
 import javax.persistence.Lob;
+import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -47,6 +47,15 @@ public class Game extends Model {
     private String duration;
 
     private Blob picture;
+
+    @OneToOne
+    private Borrowing borrowing;
+
+    private boolean isBorrowed;
+
+    private Date borrowingDate;
+
+    private Date expectedReturnDate;
 
     @Hidden
     private String fileId;
@@ -171,6 +180,29 @@ public class Game extends Model {
     }
 
     /**
+     * @return
+     */
+    public Borrowing getBorrowing() {
+        return borrowing;
+    }
+
+    /**
+     * @param borrowing
+     */
+    public void setBorrowing(Borrowing borrowing) {
+        if (borrowing == null) {
+            isBorrowed = false;
+            borrowingDate = null;
+            expectedReturnDate = null;
+        } else {
+            isBorrowed = true;
+            borrowingDate = borrowing.getBorrowingDate();
+            expectedReturnDate = borrowing.getExpectedReturnDate();
+        }
+        this.borrowing = borrowing;
+    }
+
+    /**
      * @param title
      * @param boughtOn
      * @param price
@@ -194,14 +226,25 @@ public class Game extends Model {
      * @return
      */
     public boolean isBorrowed() {
-        boolean result = false;
-        Borrowing borrowing = Borrowing.find("byGame", this).first();
-
         if (borrowing != null && borrowing.getPlayer() != null) {
-            result = true;
+            isBorrowed = true;
         }
 
-        return result;
+        return isBorrowed;
+    }
+
+    /**
+     * @return
+     */
+    public Date getBorrowingDate() {
+        return borrowingDate;
+    }
+
+    /**
+     * @return
+     */
+    public Date getExpectedReturnDate() {
+        return expectedReturnDate;
     }
 
     /**
@@ -212,7 +255,7 @@ public class Game extends Model {
         List<Game> returnGames = new ArrayList<Game>();
 
         for (Game game : games) {
-            if (!game.isBorrowed()) {
+            if (game.getBorrowing() == null) {
                 returnGames.add(game);
             }
         }
@@ -256,19 +299,5 @@ public class Game extends Model {
         if (file.exists()) {
             file.delete();
         }
-    }
-
-    /**
-     * @return
-     */
-    public String getBorrower() {
-        String result = null;
-
-        Borrowing borrowing = Borrowing.find("game.id = ? and complete = false order by borrowingDate desc", id).first();
-        if(borrowing != null) {
-            result = borrowing.getPlayer().getFullName();
-        }
-
-        return result;
     }
 }

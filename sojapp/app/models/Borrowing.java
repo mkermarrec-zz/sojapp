@@ -1,24 +1,24 @@
 package models;
 
-import java.util.Date;
-
-import javax.persistence.Entity;
-import javax.persistence.Lob;
-import javax.persistence.OneToOne;
-
+import org.apache.commons.lang.time.DateUtils;
 import play.data.validation.MaxSize;
 import play.data.validation.Required;
 import play.db.jpa.Model;
+
+import javax.persistence.Entity;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import java.util.Date;
 
 @Entity
 public class Borrowing extends Model {
     
   @Required
-  @OneToOne
+  @ManyToOne
   private User player;
 
   @Required
-  @OneToOne
+  @ManyToOne
   public Game game;
 
   @Required
@@ -69,6 +69,13 @@ public class Borrowing extends Model {
     return borrowingDate;
   }
 
+    /**
+     * @return the borrowingDate
+     */
+    public Date getExpectedReturnDate() {
+        return DateUtils.addWeeks(borrowingDate, 2);
+    }
+
   /**
    * @param borrowingDate
    *          the borrowingDate to set
@@ -85,7 +92,7 @@ public class Borrowing extends Model {
   }
 
   /**
-   * @param expectedReturnDate
+   * @param returnDate
    *          the expectedReturnDate to set
    */
   public void setReturnDate(Date returnDate) {

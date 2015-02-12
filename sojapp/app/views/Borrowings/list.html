@@ -10,7 +10,11 @@
     </div>
 
     <div id="crudListTable">
-        #{crud.table /}
+        #{crud.table fields:['game', 'player', 'returnDate'], sort:['game', 'player', 'returnDate']}
+            #{crud.custom 'returnDate'}
+            <span style="font-weight: bold;">${object.returnDate().format('dd/MM/yyyy')}</span>
+            #{/crud.custom}
+        #{/crud.table}
     </div>
 
     <div id="crudListPagination">

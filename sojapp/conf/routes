@@ -7,7 +7,7 @@ GET		/										Admin.index
 
 GET     /                                       module:secure
 
-*       /admin                                  module:crud
+*       /                                       module:crud
 
 # Ignore favicon requests
 GET     /favicon.ico                            404
@@ -15,9 +15,7 @@ GET     /favicon.ico                            404
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public
 
-GET		/user/{action}							User.{action}
-
-GET		/admin/index							Admin.index
+GET		/user/show							    User.show
 
 # Catch all
 *       /{controller}/{action}/{id}				{controller}.{action}

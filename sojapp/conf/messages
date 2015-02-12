@@ -73,3 +73,5 @@ Users=Joueurs
 # 
 crud.search=Rechercher
 isBorrowed=Etat
+borrowedDate=Le
+expectedReturnDate=Date de retour prévue

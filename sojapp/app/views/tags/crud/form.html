@@ -71,7 +71,7 @@
         #{/if}
 
         #{if field.type == 'relation'}
-            #{crud.relationField name:field.name, value:(currentObject ? currentObject[field.name] : null), field:field, games:_games, show:_show /}
+            #{crud.relationField name:field.name, value:(currentObject ? currentObject[field.name] : null), field:field, games:_games, source:_source /}
         #{/if}
 
         #{if field.type == 'boolean'}
