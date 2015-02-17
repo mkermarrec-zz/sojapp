@@ -6,6 +6,7 @@ package bootstrap;
 import models.Borrowing;
 import models.Game;
 import models.User;
+import play.Play;
 import play.jobs.Job;
 import play.jobs.OnApplicationStart;
 import play.test.Fixtures;
@@ -29,7 +30,7 @@ public class Bootstrap extends Job {
     public void doJob() {
         // Check if the database is empty
         if (User.count() == 0) {
-            Fixtures.loadModels("initial-data.yml");
+            Fixtures.loadModels(Play.applicationPath + "/conf/initial-data.yml");
         }
 
         List<Borrowing> borrowings = Borrowing.findAll();
