@@ -29,7 +29,9 @@ public class Bootstrap extends Job {
     public void doJob() {
         // Check if the database is empty
         if (User.count() == 0) {
-            Fixtures.loadModels("../../../conf/initial-data.yml");
+            Fixtures.loadModels("../../../conf/init/initial-users.yml");
+            Fixtures.loadModels("../../../conf/init/members.yml");
+            Fixtures.loadModels("../../../conf/init/games.yml");
         }
 
         List<Borrowing> borrowings = Borrowing.findAll();

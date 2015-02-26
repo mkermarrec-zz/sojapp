@@ -1,0 +1,41 @@
+User(Matt):
+    firstName: Mathieu
+    lastName: Kermarrec Délerin
+    login: kermama
+    password: secret
+    admin: true
+
+User(David):
+    firstName: David
+    lastName: Fiaux
+    login: dfiaux
+    password: secret
+    admin: true
+
+User(Benoit):
+    firstName: Benoit
+    lastName: Gauthier
+    login: bgauthier
+    password: secret
+    admin: true
+
+User(Guillaume):
+    firstName: Guillaume
+    lastName: Barbe
+    login: gbarbe
+    password: secret
+    admin: true
+
+User(Pierrick):
+    firstName: Pierrick
+    lastName: Chantrel
+    login: pchantrel
+    password: secret
+    admin: true
+
+User(Fred):
+    firstName: Frédéric
+    lastName: Charpentier
+    login: fcharpentier
+    password: secret
+    admin: true
