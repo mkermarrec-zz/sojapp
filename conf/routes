@@ -16,6 +16,9 @@ GET     /favicon.ico                            404
 GET     /public/                                staticDir:public
 
 GET		/user/show							    User.show
+POST    /user							        User.save
 
 # Catch all
 *       /{controller}/{action}/{id}				{controller}.{action}
+
+GET     /clearData                              ClearData.clearData

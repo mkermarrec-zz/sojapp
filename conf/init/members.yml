@@ -1,0 +1,6 @@
+User(Julien):
+    firstName: Julien
+    lastName: Fallet
+    login: jfallet
+    password: secret
+    admin: false

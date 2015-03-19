@@ -3,14 +3,11 @@
  */
 package bootstrap;
 
-import models.Borrowing;
-import models.Game;
+import helpers.DatabaseHelper;
 import models.User;
 import play.jobs.Job;
 import play.jobs.OnApplicationStart;
 import play.test.Fixtures;
-
-import java.util.List;
 
 
 /**
@@ -24,20 +21,14 @@ import java.util.List;
  */
 @OnApplicationStart
 public class Bootstrap extends Job {
+    private DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
 
     @Override
     public void doJob() {
-        // Check if the database is empty
-        if (User.count() == 0) {
-            Fixtures.loadModels("initial-data.yml");
+        if(User.findAll().isEmpty()) {
+            Fixtures.loadModels("init/initial-users.yml");
+            Fixtures.loadModels("init/members.yml");
+            Fixtures.loadModels("init/games.yml");
         }
-
-        List<Borrowing> borrowings = Borrowing.findAll();
-        List<Game> games = Game.findAll();
-
-        games.get(0).setBorrowing(borrowings.get(0));
-        games.get(0).save();
-        games.get(2).setBorrowing(borrowings.get(1));
-        games.get(2).save();
     }
 }

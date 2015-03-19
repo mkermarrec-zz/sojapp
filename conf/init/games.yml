@@ -1,24 +1,7 @@
-User(Toto):
-    firstName: Toto
-    lastName: Toto
-    login: toto
-    password: secret
-    admin: false
-    email: toto@gmail.com
-
-User(Matt):
-    firstName: Mathieu
-    lastName: Kermarrec
-    login: kermama
-    password: secret
-    admin: true
-
 Game(7):
     title: 7 Wonders
     price: 45.0
-    boughtOn: !!timestamp "2013-02-28T10:07:56 +1"
     description: Prenez la tête de l'une des sept grandes cités du monde Antique. Exploitez les ressources naturelles de vos terres, participez à la marche en avant du progrès, développez vos relations commerciales et affirmez votre suprématie militaire. Laissez votre empreinte dans l'histoire des civilisations en bâtissant une merveille architecturale qui transcendera les temps futurs.
-    picture: "c44347a8-14cb-4417-8151-9e49e1449e46|image/jpeg"
     nbPlayerMax: 5
     nbPlayerMin: 3
     duration: 120
@@ -26,9 +9,7 @@ Game(7):
 Game(a):
     title: The Adventurers
     price: 30.0
-    boughtOn: !!timestamp "2013-10-10T10:07:56 +1"
     description: Au cœur de la jungle Guatemaltaise, de fameux archéologues sont sur le point d'explorer l'ancien temple du dieu Maya de la pluie Chac. The Adventurers vous met dans la peau d'un de ces courageux aventuriers. Vous devrez survivre aux multiples pièges de ce temple légendaire tout en vous emparant de ses trésors les plus rares et les plus précieux. Mais attention, votre intrusion a déclenché le piège le plus implacable un rocher géant qui dévale une pente vertigineuse serpentant à travers le temple! Il va falloir réussir a sortir avant que cette énorme boule de pierre ne vous réduise en bouillie ou n'obstrue la sortie à jamais\!
-    picture: "c44347a8-14cb-4417-8151-9e49e1449e46|image/jpeg"
     nbPlayerMax: 6
     nbPlayerMin: 2
     duration: 60
@@ -36,19 +17,7 @@ Game(a):
 Game(s):
     title: Sushi bar
     price: 15.0
-    boughtOn: !!timestamp "2013-10-10T10:07:56 +1"
     description: Sushi bar
-    picture: "c44347a8-14cb-4417-8151-9e49e1449e46|image/jpeg"
     nbPlayerMax: 6
     nbPlayerMin: 2
     duration: 30
-
-Borrowing(b0):
-    player: Matt
-    game: 7
-    borrowingDate: !!timestamp "2013-02-28T10:07:56 +1"
-
-Borrowing(b1):
-    player: Matt
-    game: s
-    borrowingDate: !!timestamp "2013-03-28T10:07:56 +1"
