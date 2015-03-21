@@ -28,6 +28,7 @@ public class User extends Model {
     @Required
     private String lastName;
 
+    @Required
     @Email
     private String email;
 

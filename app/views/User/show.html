@@ -1,24 +1,24 @@
 #{extends 'CRUD/layout.html' /}
 
-<form action="@{User.save()}">
+<form action="@{User.save()}" method="POST">
     <div id="crud">
         <h2>${user.getFullName()}</h2>
 
         <div class="crudField">
-            <label for="object_email">Email:</label>
-            <input type="text" name="object_email" size="50" placeholder='${user.email}'/>
+            <label for="object_email">&{'userEmail'}</label>
+            <input type="text" id="object_email" name="email" size="50" value='${user.getEmail()}'/>
         </div>
         <div class="crudField">
-            <label for="object_password">Mot de passe:</label>
-            <input type="password" name="object_password" size="50"/>
+            <label for="object_password">&{'userPassword'}</label>
+            <input type="password" id="object_password" name="password" size="50"/>
         </div>
         <div class="crudField">
-            <label for="object_newPassword">Nouveau mot de passe:</label>
-            <input type="password" name="object_newPassword" size="50"/>
+            <label for="object_newPassword">&{'userNewPassword'}</label>
+            <input type="password" id="object_newPassword" name="newPassword" size="50"/>
         </div>
         <div class="crudField">
-            <label for="object_newPasswordBis">Resaisir mot de passe:</label>
-            <input type="password" name="object_newPasswordBis" size="50"/>
+            <label for="object_newPasswordBis">&{'userNewPasswordBis'}</label>
+            <input type="password" id="object_newPasswordBis" name="newPasswordBis" size="50"/>
         </div>
     </div>
     <p class="crudButtons">

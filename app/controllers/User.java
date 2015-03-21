@@ -1,9 +1,9 @@
 
 package controllers;
 
-import play.data.validation.Validation.ValidationResult;
+import play.data.validation.Required;
+import play.i18n.Messages;
 import play.mvc.Controller;
-import play.mvc.Scope.Params;
 import play.mvc.With;
 
 /**
@@ -21,73 +21,71 @@ public class User extends Controller {
     /**
      * @throws Throwable
      */
-    public static void show() throws Throwable {
+    public static void show() {
         String userName = Security.connected();
 
-        if (userName == null) {
-            Secure.logout();
-        } else {
-            models.User user = models.User.find("byLogin", userName).first();
-            render(user);
-        }
+        models.User user = models.User.find("byLogin", userName).first();
+        render(user);
     }
 
     /**
      *
      */
-    public static void save() {
+    public static void save(@Required String email, String password, String newPassword, String newPasswordBis) {
+
         String userName = Security.connected();
         models.User user = models.User.find("byLogin", userName).first();
 
-        try {
-            validateForm(params);
-            String email = params.get("object_email");
-            String password = params.get("object_password");
-            String newPassword = params.get("object_newPassword");
-            String newPasswordBis = params.get("object_newPasswordBis");
+        validateNewPassword(user, password, newPassword, newPasswordBis);
 
-            if (email != null && !"".equals(email) && !user.getEmail().equals(email)) {
-                user.setEmail(email);
-                if (!user.validateAndSave()) {
-                    throw (new Exception("Email non valide"));
-                }
-            }
-
-            if (!"".equals(password) && user.getPassword().equals(password)) {
-                if (newPassword != null && !"".equals(newPassword) && newPassword.equals(newPasswordBis)) {
-                    user.setPassword(newPassword);
-                    user.save();
-                    redirect("/user/show");
-                } else {
-                    throw (new Exception("Les mots de passe sont vides ou ne sont pas identiques"));
-                }
+        if (validation.hasErrors()) {
+            params.flash(); // add http parameters to the flash scope
+            validation.keep(); // keep the errors for the next request
+        } else {
+            if (!"".equals(newPassword)) {
+                user.setPassword(newPassword);
+                flash.success(Messages.get("userOk"));
             } else {
-                throw (new Exception("Mot de passe incorrect"));
+                flash.success(Messages.get("userEmailOk"));
             }
-        } catch (Exception e) {
-            flash("error", e.getMessage());
-            redirect("/user/show");
+            user.setEmail(email);
+            user.save();
         }
 
+        show();
     }
 
     /**
-     * @param params
+     * @param password
+     * @param newPassword
+     * @param newPasswordBis
      * @throws Exception
      */
-    private static void validateForm(Params params) throws Exception {
-        String email = params.get("email");
-        String password = params.get("password");
-        String passwordbis = params.get("passwordbis");
+    private static void validateNewPassword(models.User user, String password, String newPassword, String newPasswordBis) {
+        if (!"".equals(password) && !"".equals(newPassword) && !"".equals(newPasswordBis)) {
 
-        ValidationResult result = validation.email(email);
+            if (user.getPassword().equals(password)) {
+                if (!newPassword.equals(newPasswordBis)) {
+                    validation.addError("newPasswordBis", Messages.get("newPasswordBisError"));
+                    flash.error(Messages.get("newPasswordBisError"));
+                }
+            } else {
+                validation.addError("password", Messages.get("passwordError"));
+                flash.error(Messages.get("passwordError"));
+            }
 
-        if (!result.ok) {
-            throw (new Exception("Email invalide"));
-        }
-
-        if (password != null && password != null && !password.equals(passwordbis)) {
-            throw (new Exception("Les mots de passes doivent être identiques"));
+        } else {
+            if ("".equals(password) && "".equals(newPassword) && "".equals(newPasswordBis)) {
+                // doing nothing
+            } else {
+                if (!"".equals(password)) {
+                    validation.addError("newPassword", Messages.get("newPasswordError"));
+                    flash.error(Messages.get("newPasswordError"));
+                } else {
+                    validation.addError("password", Messages.get("passwordRequiredError"));
+                    flash.error(Messages.get("passwordRequiredError"));
+                }
+            }
         }
     }
 

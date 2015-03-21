@@ -75,3 +75,21 @@ crud.search=Rechercher
 isBorrowed=Etat
 borrowedDate=Le
 expectedReturnDate=Date de retour prévue
+
+#
+# Mise à jour des infos utilisateur
+#
+userEmail=Email:
+userPassword=Mot de passe:
+userNewPassword=Nouveau mot de passe:
+userNewPasswordBis=Resaisir mot de passe:
+
+newPasswordBisError=Les deux nouveaux mots de passe ne sont pas identiques
+passwordError=Votre mot de passe actuel n'est pas correct
+passwordRequiredError=Votre mot de passe actuel est obligatoire
+newPasswordError=Les trois champs doivent être renseignés pour changer le mot de passe
+emailError=L'email est obligatoire
+
+userOk=Les informations ont bien été enregistrée
+userEmailOk=Votre email a bien été enregistré
+
