@@ -12,62 +12,60 @@ import java.util.Date;
 
 @Entity
 public class Borrowing extends Model {
-    
-  @Required
-  @ManyToOne
-  private User player;
 
-  @Required
-  @ManyToOne
-  public Game game;
+    @Required
+    @ManyToOne
+    private User player;
 
-  @Required
-  private Date borrowingDate;
+    @Required
+    @ManyToOne
+    public Game game;
 
-  private Date returnDate;
+    @Required
+    private Date borrowingDate;
 
-  private boolean complete;
+    private Date returnDate;
 
-  @Lob
-  @MaxSize(5000)
-  private String comments;
+    private boolean complete;
 
-  /**
-   * @return the player
-   */
-  public User getPlayer() {
-    return player;
-  }
+    @Lob
+    @MaxSize(5000)
+    private String comments;
 
-  /**
-   * @param player
-   *          the player to set
-   */
-  public void setPlayer(User player) {
-    this.player = player;
-  }
+    /**
+     * @return the player
+     */
+    public User getPlayer() {
+        return player;
+    }
 
-  /**
-   * @return the game
-   */
-  public Game getGame() {
-    return game;
-  }
+    /**
+     * @param player the player to set
+     */
+    public void setPlayer(User player) {
+        this.player = player;
+    }
 
-  /**
-   * @param game
-   *          the game to set
-   */
-  public void setGame(Game game) {
-    this.game = game;
-  }
+    /**
+     * @return the game
+     */
+    public Game getGame() {
+        return game;
+    }
 
-  /**
-   * @return the borrowingDate
-   */
-  public Date getBorrowingDate() {
-    return borrowingDate;
-  }
+    /**
+     * @param game the game to set
+     */
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
+    /**
+     * @return the borrowingDate
+     */
+    public Date getBorrowingDate() {
+        return borrowingDate;
+    }
 
     /**
      * @return the borrowingDate
@@ -76,76 +74,79 @@ public class Borrowing extends Model {
         return DateUtils.addWeeks(borrowingDate, 2);
     }
 
-  /**
-   * @param borrowingDate
-   *          the borrowingDate to set
-   */
-  public void setBorrowingDate(Date borrowingDate) {
-    this.borrowingDate = borrowingDate;
-  }
+    /**
+     * @param borrowingDate the borrowingDate to set
+     */
+    public void setBorrowingDate(Date borrowingDate) {
+        this.borrowingDate = borrowingDate;
+    }
 
-  /**
-   * @return the expectedReturnDate
-   */
-  public Date getReturnDate() {
-    return returnDate;
-  }
+    /**
+     * @return the expectedReturnDate
+     */
+    public Date getReturnDate() {
+        return returnDate;
+    }
 
-  /**
-   * @param returnDate
-   *          the expectedReturnDate to set
-   */
-  public void setReturnDate(Date returnDate) {
-    this.returnDate = returnDate;
-  }
+    /**
+     * @param returnDate the expectedReturnDate to set
+     */
+    public void setReturnDate(Date returnDate) {
+        this.returnDate = returnDate;
+    }
 
-  /**
-   * @return the complete
-   */
-  public boolean isComplete() {
-    return complete;
-  }
+    /**
+     * @return the complete
+     */
+    public boolean isComplete() {
+        return complete;
+    }
 
-  /**
-   * @param complete
-   *          the complete to set
-   */
-  public void setComplete(boolean complete) {
-    this.complete = complete;
-  }
+    /**
+     * @param complete the complete to set
+     */
+    public void setComplete(boolean complete) {
+        this.complete = complete;
+    }
 
-  /**
-   * @return the comments
-   */
-  public String getComments() {
-    return comments;
-  }
+    /**
+     * @return the comments
+     */
+    public String getComments() {
+        return comments;
+    }
 
-  /**
-   * @param comments
-   *          the comments to set
-   */
-  public void setComments(String comments) {
-    this.comments = comments;
-  }
+    /**
+     * @param comments the comments to set
+     */
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
 
-  /**
-   * @param player
-   * @param game
-   * @param borrowingDate
-   */
-  public Borrowing(User player, Game game, Date borrowingDate) {
-    super();
-    this.player = player;
-    this.game = game;
-    this.borrowingDate = borrowingDate;
-  }
+    /**
+     * @param player
+     * @param game
+     * @param borrowingDate
+     */
+    public Borrowing(User player, Game game, Date borrowingDate) {
+        super();
+        this.player = player;
+        this.game = game;
+        this.borrowingDate = borrowingDate;
+    }
 
-  /**
-   * 
-   */
-  @Override
-  public String toString() {
-    return "[" + game.toString() + "]" + " " + player.toString();
-  }
+    @Override
+    public void _save() {
+        super._save();
+        this.getGame().setBorrowing(this);
+        this.getGame().save();
+    }
+
+    /**
+     *
+     */
+    @Override
+    public String toString() {
+        return "[" + game.toString() + "]" + " " + player.toString();
+    }
 }

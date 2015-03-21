@@ -7,8 +7,10 @@ import play.data.validation.Required;
 import play.db.jpa.Model;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Project: SOJ <br/>
@@ -44,8 +46,8 @@ public class User extends Model {
 
     private boolean admin;
 
-    @OneToOne
-    private Borrowing borrowing;
+    @OneToMany
+    private List<Borrowing> borrowings;
 
     /**
      * @return the fisrtName
@@ -73,20 +75,6 @@ public class User extends Model {
      */
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    /**
-     * build full name of user
-     *
-     * @return
-     */
-    public String getFullName() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(firstName);
-        sb.append(" ");
-        sb.append(lastName);
-
-        return sb.toString();
     }
 
     /**
@@ -164,6 +152,28 @@ public class User extends Model {
      */
     public void setGuarantee(double guarantee) {
         this.guarantee = guarantee;
+    }
+
+    public List<Borrowing> getBorrowings() {
+        return borrowings;
+    }
+
+    public void setBorrowings(List<Borrowing> borrowings) {
+        this.borrowings = borrowings;
+    }
+
+    /**
+     * build full name of user
+     *
+     * @return
+     */
+    public String getFullName() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(firstName);
+        sb.append(" ");
+        sb.append(lastName);
+
+        return sb.toString();
     }
 
     /**

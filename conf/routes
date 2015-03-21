@@ -18,6 +18,14 @@ GET     /public/                                staticDir:public
 GET		/user/show							    User.show
 POST    /user							        User.save
 
+GET		/games/show/{id}						Games.show
+POST    /games							        Games.save
+
+GET		/game/show/{id}						    Game.show
+GET		/game/showImage/{id}					Game.showImage
+GET		/game/deleteImage/{id}					Game.deleteImage
+
+
 # Catch all
 #*       /{controller}/{action}/{id}				{controller}.{action}
 

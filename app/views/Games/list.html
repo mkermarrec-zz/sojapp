@@ -9,11 +9,26 @@
         #{games.search /}
     </div>
 
+    %{
+        isAdmin = false;
+    }%
+    #{secure.check 'admin'}
+    %{
+        isAdmin = true;
+    }%
+    #{/secure.check}
+
+
     <div id="crudListTable">
         #{games.table fields:['title', 'isBorrowed', 'borrowingDate', 'expectedReturnDate'], sort:['title', 'isBorrowed', 'borrowingDate', 'expectedReturnDate']}
 
         #{crud.custom 'title'}
-            <a href="/Game/show/${object.id}" style="font-weight: bold;">${object.title}</a>
+            #{if isAdmin}
+                <a href="@{Games.show(object.id)}" style="font-weight: bold;">${object.title}</a>
+            #{/if}
+            #{else}
+                <a href="@{Game.show(object.id)}" style="font-weight: bold;">${object.title}</a>
+            #{/else}
         #{/crud.custom}
 
         #{crud.custom 'isBorrowed'}
