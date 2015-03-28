@@ -45,22 +45,11 @@ public class Game extends Controller {
     }
 
     /**
-     * @param fileId
+     * @param id
      */
     public static void showImage(String id) {
         models.Game game = models.Game.findById(Long.parseLong(id));
         response.setContentTypeIfNotSet(game.getPicture().type());
         renderBinary(game.getPicture().get());
     }
-
-    /**
-     * @param fileId
-     */
-    public static void deleteImage(String id) {
-        models.Game game = models.Game.findById(Long.parseLong(id));
-        game.deletePicture();
-
-        redirect("/admin/games/" + id);
-    }
-
 }

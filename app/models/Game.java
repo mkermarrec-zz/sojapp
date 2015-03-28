@@ -5,7 +5,6 @@ import org.apache.commons.io.FilenameUtils;
 import play.Play;
 import play.data.validation.MaxSize;
 import play.data.validation.Required;
-import play.db.jpa.Blob;
 import play.db.jpa.Model;
 
 import javax.persistence.Entity;
@@ -46,7 +45,7 @@ public class Game extends Model {
 
     private String duration;
 
-    private Blob picture;
+    private CustomBlob picture;
 
     @OneToOne
     private Borrowing borrowing;
@@ -168,14 +167,14 @@ public class Game extends Model {
     /**
      * @return the picture
      */
-    public Blob getPicture() {
+    public CustomBlob getPicture() {
         return picture;
     }
 
     /**
      * @param picture the picture to set
      */
-    public void setPicture(Blob picture) {
+    public void setPicture(CustomBlob picture) {
         this.picture = picture;
     }
 
@@ -267,29 +266,21 @@ public class Game extends Model {
      *
      */
     @Override
-    public Game delete() {
-        deletePicture();
-        return super.delete();
+    public void _delete() {
+        picture.delete();
+        super.delete();
     }
 
-    /**
-     *
-     */
     @Override
     public void _save() {
-        if (picture == null) {
+        if (fileId == null || (picture != null && !fileId.equals(picture.getUUID()))) {
             deletePicture();
-        } else {
-            if (fileId != picture.getUUID()) {
-                deletePicture();
-                fileId = picture.getUUID();
-            }
+            fileId = picture.getUUID();
         }
-
         super._save();
     }
 
-    /**
+    /*
      * deletes the picture associated with game
      */
     public void deletePicture() {
@@ -300,4 +291,5 @@ public class Game extends Model {
             file.delete();
         }
     }
+
 }

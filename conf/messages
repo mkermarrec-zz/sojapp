@@ -83,6 +83,7 @@ userEmail=Email:
 userPassword=Mot de passe:
 userNewPassword=Nouveau mot de passe:
 userNewPasswordBis=Resaisir mot de passe:
+userChangePasswordTitle=Changer de mot de passe
 
 newPasswordBisError=Les deux nouveaux mots de passe ne sont pas identiques
 passwordError=Votre mot de passe actuel n'est pas correct

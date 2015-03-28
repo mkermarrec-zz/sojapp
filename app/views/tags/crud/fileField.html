@@ -1,28 +1,40 @@
 #{field 'object.' + _name}
 <script type="text/javascript">
-    function getfile(){
-    document.getElementById('${field.id}').click();
-    }
+    $(function() {
+        $('#uploadButton').click(function(){
+            upload.click();
+        });
+
+        $('#upload').change(function(){
+           $('#${field.id}').val($(this).val());
+        });
+    });
 </script>
 <label for="${field.id}"> &{_name} </label>
 
-
 #{if _value && _value.exists() && _id}
-<div style="margin-top: 10px; display: inline-block; text-align: left; vertical-align: top;">
-    <input id="${field.id}" class="${field.errorClass}" type="file" name="${field.name}" style="display: none"/>
-    <input type="button" value="Parcourir" onclick="getfile()"/>
-</div>
-<div style="margin-top: 10px; display: inline-block; text-align: left;">
-    <img src="@{Game.showImage(_id)}" alt="${_id}" height="50px" width="50px"/>
-	<span style="vertical-align: top;"> 
-		<input type="checkbox" name="${field.name}_delete_" value="true"/>
-		(delete)
-	</span>
-</div>
+    <input type="file" id="${field.id}" class="${field.errorClass}" style="display: none" name="${field.name}"
+        #{if params[field.name]}
+        value="${params[field.name]}"
+        #{/if}
+        #{else}
+        value="${_value.getFile().getName()}"
+        #{/else}
+    />
+    <div style="margin-top: 10px; display: inline-block; text-align: left;">
+        <img src="@{Game.showImage(_id)}" alt="${_id}" height="50px" width="50px"/>
+        <span style="vertical-align: top;">
+            <input type="checkbox" name="${field.name}_delete_"/><span>(delete)</span>
+        </span>
+    </div>
 #{/if}
 #{else}
 <div style="margin-top: 10px; display: inline-block; text-align: left; vertical-align: top;">
-    <input id="${field.id}" class="${field.errorClass}" type="file" name="${field.name}"/>
+    <input type="file" id="${field.id}" class="${field.errorClass}" name="${field.name}"
+           #{if params[field.name]}
+           value="${params[field.name]}"
+           #{/if}
+    />
 </div>
 #{/else}
 
