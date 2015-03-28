@@ -1,7 +1,7 @@
 # Application dependencies
 
 require:
-    - play 1.3
+    - play
     - play -> crud
     - play -> secure
     - play -> externalconfig 0.2
