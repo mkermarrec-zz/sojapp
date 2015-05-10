@@ -4,12 +4,13 @@
     <title>SOJ</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     #{get 'moreStyles' /}
-    <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/main.css'}"/>
-    <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/jquery-ui.min.css'}"/>
+    #{stylesheet media:'screen', src:'main.css' /}
+    #{stylesheet media:'screen', src:'jquery-ui.min.css' /}
+    #{get 'moreCss' /}
     <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}"/>
-    <script src="@{'/public/javascripts/jquery-1.9.1.js'}"></script>
-    <script src="@{'/public/javascripts/jquery-ui.min.js'}"></script>
-    <script src="@{'/public/javascripts/jquery.ui.datepicker-fr.min.js'}"></script>
+    #{script src:'jquery-1.9.1.js', charset:'utf-8' /}
+    #{script src:'jquery-ui.min.js', charset:'utf-8' /}
+    #{script src:'jquery.ui.datepicker-fr.min.js', charset:'utf-8' /}
 </head>
 
 

@@ -1,7 +1,5 @@
 package models;
 
-import controllers.CRUD.Hidden;
-import org.apache.commons.io.FilenameUtils;
 import play.Play;
 import play.data.validation.MaxSize;
 import play.data.validation.Required;
@@ -11,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -45,7 +42,7 @@ public class Game extends Model {
 
     private String duration;
 
-    private CustomBlob picture;
+    private String picture;
 
     @OneToOne
     private Borrowing borrowing;
@@ -55,9 +52,6 @@ public class Game extends Model {
     private Date borrowingDate;
 
     private Date expectedReturnDate;
-
-    @Hidden
-    private String fileId;
 
     /**
      * @return the title
@@ -167,14 +161,14 @@ public class Game extends Model {
     /**
      * @return the picture
      */
-    public CustomBlob getPicture() {
+    public String getPicture() {
         return picture;
     }
 
     /**
      * @param picture the picture to set
      */
-    public void setPicture(CustomBlob picture) {
+    public void setPicture(String picture) {
         this.picture = picture;
     }
 
@@ -261,35 +255,4 @@ public class Game extends Model {
 
         return returnGames;
     }
-
-    /**
-     *
-     */
-    @Override
-    public void _delete() {
-        picture.delete();
-        super.delete();
-    }
-
-    @Override
-    public void _save() {
-        if (fileId == null || (picture != null && !fileId.equals(picture.getUUID()))) {
-            deletePicture();
-            fileId = picture.getUUID();
-        }
-        super._save();
-    }
-
-    /*
-     * deletes the picture associated with game
-     */
-    public void deletePicture() {
-        String filePath = Play.configuration.get("attachments.path") + File.separator + fileId;
-        filePath = FilenameUtils.separatorsToSystem(filePath);
-        File file = new File(filePath);
-        if (file.exists()) {
-            file.delete();
-        }
-    }
-
 }

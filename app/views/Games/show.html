@@ -1,5 +1,8 @@
 #{extends 'CRUD/layout.html' /}
 #{set title:messages.get('crud.show.title', type.modelName) /}
+#{set 'moreCss'}
+#{stylesheet 'show-application.css' /}
+#{/set}
 
 <div id="crudShow" class="${type.name}">
 
@@ -8,7 +11,29 @@
     <div class="objectForm">
         #{form action:@save(object._key()), enctype:'multipart/form-data'}
         #{crud.form fields:['title', 'boughtOn', 'price', 'description', 'nbPlayerMin', 'nbPlayerMax', 'duration',
-            'picture'] /}
+            'picture']}
+            #{crud.custom 'picture'}
+                <script>
+                    var cacheImageUrl = "@{CachedImages.cacheImage}";
+                    var showImageUrl = "@{CachedImages.showImage}" + "?token=";
+                </script>
+                #{script src:'game/game.js', charset:'utf-8' /}
+                <label for="picture">
+                    Image
+                </label>
+                <input type="hidden" name="object.picture" id="picture">
+                <img id="icon-img" class="img-icon"
+                    #{if flash.icon}
+                    src="@{AppdToolkit.showCachedImage(flash.authenticityToken)}"
+                    #{/if}
+                    #{else}
+                    src="@{Game.showImage(object.id)}"
+                    #{/else}
+                />
+                <input type="file" id="pictureFile" style="display: none;">
+                <input type="button" value="Parcourir" id="pictureButton" style="vertical-align: top;">
+            #{/crud.custom}
+        #{/crud.form}
         <p class="crudButtons">
             <input type="submit" name="_saveAndContinue" value="&{'crud.saveAndContinue', type.modelName}"/>
             <input type="submit" name="_save" value="&{'crud.save', type.modelName}"/>

@@ -7,6 +7,7 @@ package controllers;
 import play.mvc.Controller;
 import play.mvc.With;
 
+import java.io.ByteArrayInputStream;
 import java.util.logging.Logger;
 
 /**
@@ -49,7 +50,7 @@ public class Game extends Controller {
      */
     public static void showImage(String id) {
         models.Game game = models.Game.findById(Long.parseLong(id));
-        response.setContentTypeIfNotSet(game.getPicture().type());
-        renderBinary(game.getPicture().get());
+        response.setContentTypeIfNotSet("image/png");
+        renderBinary(new ByteArrayInputStream(game.getPicture().getBytes()));
     }
 }
