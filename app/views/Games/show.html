@@ -23,11 +23,16 @@
                 </label>
                 <input type="hidden" name="object.picture" id="picture">
                 <img id="icon-img" class="img-icon"
-                    #{if flash.icon}
-                    src="@{AppdToolkit.showCachedImage(flash.authenticityToken)}"
+                    #{if flash.get('object.picture')}
+                    src="@{CachedImages.showImage(flash.authenticityToken)}"
                     #{/if}
                     #{else}
-                    src="@{Game.showImage(object.id)}"
+                        #{if object.picture}
+                            src="@{Game.showImage(object.id)}"
+                        #{/if}
+                        #{else}
+                            src="@{'/public/images/placeholder.png'}"
+                        #{/else}
                     #{/else}
                 />
                 <input type="file" id="pictureFile" style="display: none;">

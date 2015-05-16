@@ -18,6 +18,7 @@ POST    /user							        User.save
 
 GET     /games/showImage  			            CachedImages.showImage
 POST    /games/cacheImage  			            CachedImages.cacheImage
+GET     /games/new                              Games.blank
 POST    /games                                  Games.create
 GET		/games/{id}						        Games.show
 POST    /games/{id}							    Games.save
@@ -26,12 +27,12 @@ GET		/game/{id}						        Game.show
 GET		/game/{id}/image    					Game.showImage
 
 *       /                                       module:crud
-#DELETE  /games/{id}                             Games.delete
-#GET     /borrowings                             Borrowings.list
-#GET     /games                                  Games.list
-#GET     /users                                  Users.list
+#DELETE  /games/{id}                            Games.delete
+#GET     /borrowings                            Borrowings.list
+#GET     /games                                 Games.list
+#GET     /users                                 Users.list
 
 # Catch all
-#*       /{controller}/{action}/{id}				{controller}.{action}
+#*       /{controller}/{action}/{id}			{controller}.{action}
 
 GET     /clearData                              ClearData.clearData

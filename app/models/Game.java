@@ -1,14 +1,15 @@
 package models;
 
+import org.apache.commons.io.FileUtils;
+import play.Logger;
 import play.Play;
 import play.data.validation.MaxSize;
 import play.data.validation.Required;
 import play.db.jpa.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.Lob;
-import javax.persistence.OneToOne;
-import javax.persistence.Transient;
+import javax.persistence.*;
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -42,7 +43,8 @@ public class Game extends Model {
 
     private String duration;
 
-    private String picture;
+    @Lob
+    private byte[] picture;
 
     @OneToOne
     private Borrowing borrowing;
@@ -161,14 +163,14 @@ public class Game extends Model {
     /**
      * @return the picture
      */
-    public String getPicture() {
+    public byte[] getPicture() {
         return picture;
     }
 
     /**
      * @param picture the picture to set
      */
-    public void setPicture(String picture) {
+    public void setPicture(byte[] picture) {
         this.picture = picture;
     }
 
