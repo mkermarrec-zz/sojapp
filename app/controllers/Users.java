@@ -1,5 +1,6 @@
 package controllers;
 
+import controllers.security.CheckAdmin;
 import play.mvc.With;
 
 /**
@@ -12,7 +13,7 @@ import play.mvc.With;
  * @author : xcks8484
  * @since : 15 oct. 2013
  */
-@Check("admin")
+@CheckAdmin()
 @With(Secure.class)
 public class Users extends CRUD {
 }

@@ -18,6 +18,9 @@ crud.help.email=Adresse email valide
 crud.help.dateformat=Date au format %s
 crud.help.numeric=Numérique
 crud.selectValue=(Sélectionner une valeur)
+crud.created=The &{%s} has been created
+crud.saved=The &{%s} has been saved
+crud.deleted=The &{%s} has been deleted
 
 #
 # Fiche admin jeu
@@ -40,6 +43,7 @@ complete=Le jeu est-il complet ?
 comments=Commentaires
 player=Joueur
 game=Jeu
+returnGame=Rendre le jeu
 
 #
 # Fiche admin joueur

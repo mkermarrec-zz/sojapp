@@ -9,31 +9,22 @@
         #{games.search /}
     </div>
 
-    %{
-        isAdmin = false;
-    }%
-    #{secure.check 'admin'}
-    %{
-        isAdmin = true;
-    }%
-    #{/secure.check}
-
 
     <div id="crudListTable">
         #{games.table fields:['title', 'isBorrowed', 'borrowingDate', 'expectedReturnDate'], sort:['title', 'isBorrowed', 'borrowingDate', 'expectedReturnDate']}
 
         #{crud.custom 'title'}
-            #{if isAdmin}
+            #{secure.checkAdmin}
                 <a href="@{Games.show(object.id)}" style="font-weight: bold;">${object.title}</a>
-            #{/if}
-            #{else}
+            #{/secure.checkAdmin}
+            #{secure.checkNotAdmin}
                 <a href="@{Game.show(object.id)}" style="font-weight: bold;">${object.title}</a>
-            #{/else}
+            #{/secure.checkNotAdmin}
         #{/crud.custom}
 
         #{crud.custom 'isBorrowed'}
         #{if object.isBorrowed() }
-        <span style="color:red;font-weight: bold;">Emprunté #{secure.check 'admin'}par ${object.getBorrowing().getPlayer().getFullName()}#{/secure.check}</span>
+        <span style="color:red;font-weight: bold;">Emprunté #{secure.checkAdmin}par ${object.getBorrowing().getPlayer().getFullName()}#{/secure.checkAdmin}</span>
         #{/if}
         #{else}
         Disponible
@@ -59,9 +50,9 @@
         #{games.pagination /}
     </div>
 
-    #{secure.check 'admin'}
+    #{secure.checkAdmin}
     <p id="crudListAdd">
         <a href="@{blank()}">&{'crud.add', 'jeu'}</a>
     </p>
-    #{/secure.check}
+    #{/secure.checkAdmin}
 </div>

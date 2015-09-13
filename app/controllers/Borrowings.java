@@ -1,11 +1,16 @@
 package controllers;
 
+import models.Borrowing;
+import org.apache.commons.collections.iterators.EntrySetMapIterator;
 import play.db.Model;
 import play.exceptions.TemplateNotFoundException;
 import play.mvc.With;
 
 import java.lang.reflect.Constructor;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Project: SOJ <br/>
@@ -38,7 +43,6 @@ public class Borrowings extends CRUD {
     }
 
     /**
-     *
      * @param id
      * @throws Exception
      */
@@ -53,6 +57,59 @@ public class Borrowings extends CRUD {
             render(type, object, games);
         } catch (TemplateNotFoundException e) {
             render("CRUD/show.html", type, object, games);
+        }
+    }
+
+    public static void returnGame(String id, Date returnDate) throws Exception {
+        ObjectType type = ObjectType.get(getControllerClass());
+        notFoundIfNull(type);
+        Model object = type.findById(id);
+        notFoundIfNull(object);
+
+        Borrowing borrowing = (Borrowing) object;
+
+        borrowing.setArchived(true);
+        borrowing.setReturnDate(returnDate);
+        borrowing.save();
+        borrowing.getGame().setBorrowing(null);
+        borrowing.getGame().save();
+
+        redirect("Borrowings.list");
+    }
+
+    public static void list(int page, String search, String searchFields, String orderBy, String order) {
+
+        request.args.put("where", "archived = false");
+        ObjectType type = ObjectType.get(getControllerClass());
+        notFoundIfNull(type);
+        if (page < 1) {
+            page = 1;
+        }
+        List<Model> objects = type.findPage(page, search, searchFields, orderBy, order, (String) request.args.get("where"));
+        Long count = type.count(search, searchFields, (String) request.args.get("where"));
+        Long totalCount = type.count(null, null, (String) request.args.get("where"));
+        try {
+            render(type, objects, count, totalCount, page, orderBy, order);
+        } catch (TemplateNotFoundException e) {
+            render("CRUD/list.html", type, objects, count, totalCount, page, orderBy, order);
+        }
+    }
+
+    public static void listArchived(int page, String search, String searchFields, String orderBy, String order) {
+
+        request.args.put("where", "archived = true");
+        ObjectType type = ObjectType.get(getControllerClass());
+        notFoundIfNull(type);
+        if (page < 1) {
+            page = 1;
+        }
+        List<Model> objects = type.findPage(page, search, searchFields, orderBy, order, (String) request.args.get("where"));
+        Long count = type.count(search, searchFields, (String) request.args.get("where"));
+        Long totalCount = type.count(null, null, (String) request.args.get("where"));
+        try {
+            render(type, objects, count, totalCount, page, orderBy, order);
+        } catch (TemplateNotFoundException e) {
+            render("CRUD/list.html", type, objects, count, totalCount, page, orderBy, order);
         }
     }
 }

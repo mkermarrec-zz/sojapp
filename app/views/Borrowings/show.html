@@ -15,10 +15,21 @@
         #{/form}
     </div>
 
-    #{form @delete(object._key())}
+    #{if !object.isArchived()}
+    #{form @Borrowings.returnGame(object._key()), id:'form'}
     <p class="crudDelete">
-        <input type="submit" value="&{'crud.delete', 'emprunt'}"/>
+        <input type="hidden" name="returnDate" id="returnDate" />
+        <input type="submit" value="&{'returnGame'}"/>
     </p>
     #{/form}
+    #{/if}
 
 </div>
+
+<script>
+    $( "#form" ).submit(function(){
+        $("#returnDate").val($( "#object_returnDate" ).val());
+        submit();
+    });
+    $( "#object_returnDate" ).datepicker({ dateFormat: 'dd/mm/yy'}).datepicker( "setDate", new Date());
+</script>

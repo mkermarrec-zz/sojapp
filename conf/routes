@@ -5,7 +5,12 @@
 # Home page
 GET		/										Admin.index
 
-GET     /                                       module:secure
+### Security
+GET     /login                                  security.Secure.login
+GET     /logout                                 security.Secure.logout
+*       /authenticate                           security.Secure.authenticate
+GET     /onAuthenticated                        security.Security.onAuthenticated
+GET     /onDisconnect                           security.Security.onDisconnect
 
 # Ignore favicon requests
 GET     /favicon.ico                            404
@@ -26,13 +31,9 @@ POST    /games/{id}							    Games.save
 GET		/game/{id}						        Game.show
 GET		/game/{id}/image    					Game.showImage
 
-*       /                                       module:crud
-#DELETE  /games/{id}                            Games.delete
-#GET     /borrowings                            Borrowings.list
-#GET     /games                                 Games.list
-#GET     /users                                 Users.list
+DELETE  /borrowing/{id}	                        Borrowings.returnGame
+GET     /borrowings/listArchived          Borrowings.listArchived
 
-# Catch all
-#*       /{controller}/{action}/{id}			{controller}.{action}
+*       /                                       module:crud
 
 GET     /clearData                              ClearData.clearData

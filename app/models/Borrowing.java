@@ -1,5 +1,6 @@
 package models;
 
+import controllers.CRUD;
 import org.apache.commons.lang.time.DateUtils;
 import play.data.validation.MaxSize;
 import play.data.validation.Required;
@@ -31,6 +32,9 @@ public class Borrowing extends Model {
     @Lob
     @MaxSize(5000)
     private String comments;
+
+    @CRUD.Hidden
+    private boolean archived;
 
     /**
      * @return the player
@@ -71,7 +75,7 @@ public class Borrowing extends Model {
      * @return the borrowingDate
      */
     public Date getExpectedReturnDate() {
-        return DateUtils.addWeeks(borrowingDate, 2);
+        return DateUtils.addWeeks(borrowingDate, 3);
     }
 
     /**
@@ -109,6 +113,22 @@ public class Borrowing extends Model {
         this.complete = complete;
     }
 
+    public boolean isArchived() {
+        return archived;
+    }
+
+    public void setArchived(boolean archived) {
+        this.archived = archived;
+    }
+
+    /**
+     *
+     */
+    @Override
+    public String toString() {
+        return "[" + game.toString() + "]" + " " + player.toString();
+    }
+
     /**
      * @return the comments
      */
@@ -140,13 +160,5 @@ public class Borrowing extends Model {
         super._save();
         this.getGame().setBorrowing(this);
         this.getGame().save();
-    }
-
-    /**
-     *
-     */
-    @Override
-    public String toString() {
-        return "[" + game.toString() + "]" + " " + player.toString();
     }
 }

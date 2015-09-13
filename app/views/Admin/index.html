@@ -1,3 +1,16 @@
 #{extends 'CRUD/layout.html' /}
 
-<h2>Bienvenue admin</h2>
+<script>
+    $.ajax({
+        type: "GET",
+        url: "/borrowings/listArchived",
+        success: function(data, textStatus) {
+            $("#result").html(data);
+        },
+        error: function() {
+            alert('Not OKay');
+        }
+    })
+</script>
+
+<div id="result"></div>

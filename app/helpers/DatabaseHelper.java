@@ -42,8 +42,6 @@ public class DatabaseHelper {
             Fixtures.loadModels("init/members.yml");
             Fixtures.loadModels("init/games.yml");
 
-            FileUtils.cleanDirectory(new File(Play.configuration.getProperty("attachments.path")));
-
             Logger.info("Data have been well deleted");
         } catch (Exception e) {
             if (e.getCause() != null) {

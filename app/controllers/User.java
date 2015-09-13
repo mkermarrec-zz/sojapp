@@ -22,7 +22,7 @@ public class User extends Controller {
      * @throws Throwable
      */
     public static void show() {
-        String userName = Security.connected();
+        String userName = session.get("username");
 
         models.User user = models.User.find("byLogin", userName).first();
         render(user);
@@ -33,7 +33,7 @@ public class User extends Controller {
      */
     public static void save(@Required String email, String password, String newPassword, String newPasswordBis) {
 
-        String userName = Security.connected();
+        String userName = session.get("username");
         models.User user = models.User.find("byLogin", userName).first();
 
         validateNewPassword(user, password, newPassword, newPasswordBis);

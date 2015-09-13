@@ -7,7 +7,7 @@ import play.mvc.With;
 /**
  * 
  * Project: SOJ <br/>
- * File : Admin.java<br/>
+ * File : Home.java<br/>
  * Package : controllers<br/>
  * Description : <br/>
  * 

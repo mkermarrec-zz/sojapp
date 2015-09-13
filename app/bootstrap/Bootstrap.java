@@ -5,6 +5,7 @@ package bootstrap;
 
 import helpers.DatabaseHelper;
 import models.User;
+import play.Play;
 import play.jobs.Job;
 import play.jobs.OnApplicationStart;
 import play.test.Fixtures;
@@ -25,7 +26,7 @@ public class Bootstrap extends Job {
 
     @Override
     public void doJob() {
-        if(User.findAll().isEmpty()) {
+        if("dev".equalsIgnoreCase(Play.mode.toString()) && User.findAll().isEmpty()) {
             Fixtures.loadModels("init/initial-users.yml");
             Fixtures.loadModels("init/members.yml");
             Fixtures.loadModels("init/games.yml");

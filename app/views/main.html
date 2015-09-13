@@ -18,28 +18,28 @@
 
 <div id="header">
     <div id="logo">
-        SiiOnJouait #{secure.check 'admin'}<span>Administration</span>#{/secure.check}
+        SiiOnJouait #{secure.checkAdmin}<span>Administration</span>#{/secure.checkAdmin}
     </div>
     <ul id="tools">
-        <li><a href="@{User.show()}">${session.get("usr")}</a> | <a href="@{Secure.logout()}">Deconnexion</a></li>
+        <li><a href="@{User.show()}">${session.get("username")}</a> | <a href="@{security.Secure.logout()}">Deconnexion</a></li>
     </ul>
 </div>
 
 <div id="main">
 
     <ul id="adminMenu">
-        #{if session.get("isAdmin") == "true"}
+        #{secure.checkAdmin}
         <li class="${request.action.contains('Admin') ? 'selected' : ''}">
             <a href="@{Admin.index()}">Accueil</a>
         </li>
-        #{/if}
-        #{else}
+        #{/secure.checkAdmin}
+        #{secure.checkNotAdmin}
         <li class="${request.action.contains('Games') ? 'selected' : ''}">
             <a href="@{Games.list()}">Accueil</a>
         </li>
-        #{/else}
+        #{/secure.checkNotAdmin}
         </li>
-        #{secure.check 'admin'}
+        #{secure.checkAdmin}
         <li class="${request.action.contains('Borrowings') ? 'selected' : ''}">
             <a href="@{Borrowings.list()}">Emprunts</a>
         </li>
@@ -49,7 +49,7 @@
         <li class="${request.action.contains('Users') ? 'selected' : ''}">
             <a href="@{Users.list()}">Joueurs</a>
         </li>
-        #{/secure.check}
+        #{/secure.checkAdmin}
     </ul>
 
     #{doLayout /}

@@ -5,10 +5,12 @@ import play.data.validation.Email;
 import play.data.validation.Password;
 import play.data.validation.Required;
 import play.db.jpa.Model;
+import play.libs.Crypto;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 import java.util.Date;
 import java.util.List;
 
@@ -45,6 +47,9 @@ public class User extends Model {
     private double guarantee;
 
     private boolean admin;
+
+    @Transient
+    private boolean passwordHasChanged;
 
     @OneToMany
     private List<Borrowing> borrowings;
@@ -102,7 +107,17 @@ public class User extends Model {
      * @param password the password to set
      */
     public void setPassword(String password) {
-        this.password = password;
+        passwordHasChanged = false;
+
+        if (this.password == null) {
+            this.password = password;
+            passwordHasChanged = true;
+        } else {
+            if(!this.password.equals(password)) {
+                this.password = password;
+                passwordHasChanged = true;
+            }
+        }
     }
 
     /**
@@ -199,19 +214,18 @@ public class User extends Model {
     }
 
     /**
-     * @param username
-     * @param password
-     * @return
-     */
-    public static User connect(String username, String password) {
-        return find("byLoginAndPassword", username, password).first();
-    }
-
-    /**
      *
      */
     @Override
     public String toString() {
         return this.firstName + " " + this.lastName;
+    }
+
+    @Override
+    public void _save() {
+        if (passwordHasChanged) {
+            password = Crypto.sign(password);
+        }
+        super._save();
     }
 }
