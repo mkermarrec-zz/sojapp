@@ -5,9 +5,9 @@
 *.ear
 
 # SOJAPP #
-sojapp/tmp/*
-sojapp/modules/*
 .idea/*
 play.bat.stackdump
-sojapp/SOJ.iml
-sojapp/SOJ.ipr
+*.iml
+*.ipr
+modules/**
+tmp/**
