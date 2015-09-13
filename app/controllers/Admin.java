@@ -14,7 +14,7 @@ import play.mvc.With;
  * @author : xcks8484
  * @since : 8 nov. 2013
  */
-@With(Secure.class)
+@With(controllers.security.Secure.class)
 public class Admin extends Controller {
 
   public static void index() {

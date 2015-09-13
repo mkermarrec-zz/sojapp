@@ -1,9 +1,10 @@
 #{extends 'Secure/layout.html' /}
 
+#{set title:messages.get('loginTitle') /}
+#{set header:messages.get('loginHeader') /}
+
 <div id="login">
 	
-	<h1>&{'secure.title'}</h1>
-		
 	#{form @authenticate()}
 		
 		#{if flash.error}

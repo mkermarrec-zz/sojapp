@@ -1,5 +1,6 @@
 package controllers;
 
+import controllers.security.CheckAdmin;
 import models.Borrowing;
 import org.apache.commons.collections.iterators.EntrySetMapIterator;
 import play.db.Model;
@@ -21,8 +22,8 @@ import java.util.stream.Collectors;
  * @author : xcks8484
  * @since : 15 oct. 2013
  */
-@Check("admin")
-@With(Secure.class)
+@CheckAdmin
+@With(controllers.security.Secure.class)
 public class Borrowings extends CRUD {
     /**
      *

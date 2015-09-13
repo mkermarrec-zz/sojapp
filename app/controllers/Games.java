@@ -20,7 +20,7 @@ import java.util.Base64;
  * @author : xcks8484
  * @since : 15 oct. 2013
  */
-@With(Secure.class)
+@With(controllers.security.Secure.class)
 public class Games extends CRUD {
 
     public static void save(String id) throws Exception {

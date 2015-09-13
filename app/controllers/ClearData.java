@@ -1,5 +1,6 @@
 package controllers;
 
+import controllers.security.CheckAdmin;
 import helpers.DatabaseHelper;
 import play.mvc.Controller;
 import play.mvc.With;
@@ -13,8 +14,8 @@ import play.mvc.With;
  * @author : xcks8484
  * @since : 26/02/2015
  */
-@With(Secure.class)
-@Check("admin")
+@CheckAdmin
+@With(controllers.security.Secure.class)
 public class ClearData extends Controller {
     private static DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
 

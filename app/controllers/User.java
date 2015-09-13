@@ -1,6 +1,7 @@
 
 package controllers;
 
+import controllers.security.*;
 import play.data.validation.Required;
 import play.i18n.Messages;
 import play.mvc.Controller;
@@ -15,7 +16,7 @@ import play.mvc.With;
  * @author : xcks8484
  * @since : 29 oct. 2013
  */
-@With(Secure.class)
+@With(controllers.security.Secure.class)
 public class User extends Controller {
 
     /**

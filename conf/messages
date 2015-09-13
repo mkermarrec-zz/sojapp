@@ -98,3 +98,5 @@ emailError=L'email est obligatoire
 userOk=Les informations ont bien été enregistrée
 userEmailOk=Votre email a bien été enregistré
 
+
+secure.title=Connexion

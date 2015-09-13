@@ -13,7 +13,7 @@ import play.mvc.With;
  * @author : xcks8484
  * @since : 15 oct. 2013
  */
-@CheckAdmin()
-@With(Secure.class)
+@CheckAdmin
+@With(controllers.security.Secure.class)
 public class Users extends CRUD {
 }

@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  * @author : xcks8484
  * @since : 24 oct. 2013
  */
-@With(Secure.class)
+@With(controllers.security.Secure.class)
 public class Game extends Controller {
 
     /**
