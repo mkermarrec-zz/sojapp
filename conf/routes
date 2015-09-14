@@ -3,7 +3,8 @@
 # ~~~~
 
 # Home page
-GET		/										Admin.index
+GET		/admin									Admin.index
+GET		/   									Games.list
 
 ### Security
 GET     /login                                  security.Secure.login

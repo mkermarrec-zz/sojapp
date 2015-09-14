@@ -4,6 +4,7 @@ package controllers;
 import controllers.security.*;
 import play.data.validation.Required;
 import play.i18n.Messages;
+import play.libs.Crypto;
 import play.mvc.Controller;
 import play.mvc.With;
 
@@ -65,7 +66,7 @@ public class User extends Controller {
     private static void validateNewPassword(models.User user, String password, String newPassword, String newPasswordBis) {
         if (!"".equals(password) && !"".equals(newPassword) && !"".equals(newPasswordBis)) {
 
-            if (user.getPassword().equals(password)) {
+            if (user.getPassword().equals(Crypto.sign(password))) {
                 if (!newPassword.equals(newPasswordBis)) {
                     validation.addError("newPasswordBis", Messages.get("newPasswordBisError"));
                     flash.error(Messages.get("newPasswordBisError"));

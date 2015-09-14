@@ -95,8 +95,10 @@ passwordRequiredError=Votre mot de passe actuel est obligatoire
 newPasswordError=Les trois champs doivent être renseignés pour changer le mot de passe
 emailError=L'email est obligatoire
 
-userOk=Les informations ont bien été enregistrée
+userOk=Les informations ont bien été enregistrées
 userEmailOk=Votre email a bien été enregistré
 
 
 secure.title=Connexion
+loginLoggedOutMessage=Vous avez été déconnecté avec succès
+loginTimeoutMessage=Votre session a expiré

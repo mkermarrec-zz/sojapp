@@ -90,7 +90,11 @@ public class Security extends Secure.Security {
      */
 
     public static void onAuthenticated() {
-        Admin.index();
+        if(checkAdmin()) {
+            Admin.index();
+        }else {
+            redirect("/");
+        }
     }
 
 }

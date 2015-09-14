@@ -93,6 +93,7 @@ public class Secure extends Controller {
 
         }
         LoggerHelper.getInstance().logUserAction(session.get("username"), "LOGIN", "OK", request);
+
         // Redirect to the original URL (or /)
         redirectToOriginalURL();
     }
@@ -110,6 +111,7 @@ public class Secure extends Controller {
 
     static void redirectToOriginalURL() throws Throwable {
         Security.invoke("onAuthenticated");
+
         String url = flash.get("url");
         if (url == null) {
             url = Play.ctxPath + "/";
@@ -151,6 +153,10 @@ public class Secure extends Controller {
          */
         static boolean check(String profile) {
             return true;
+        }
+
+        static boolean checkAdmin() {
+            return false;
         }
 
         /**
