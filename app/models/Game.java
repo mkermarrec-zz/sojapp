@@ -16,7 +16,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-public class Game extends Model {
+public class Game extends Model implements Comparable {
 
     @Transient
     private static String FORMAT = Play.configuration.getProperty("date.format");
@@ -256,5 +256,10 @@ public class Game extends Model {
         }
 
         return returnGames;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return this.getTitle().compareTo(((Game) o).getTitle());
     }
 }

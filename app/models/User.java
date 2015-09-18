@@ -24,7 +24,7 @@ import java.util.List;
  * @since : 15 oct. 2013
  */
 @Entity
-public class User extends Model {
+public class User extends Model implements Comparable {
 
     @Required
     private String firstName;
@@ -227,5 +227,11 @@ public class User extends Model {
             password = Crypto.sign(password);
         }
         super._save();
+    }
+
+
+    @Override
+    public int compareTo(Object o) {
+        return this.getFullName().compareTo(((User) o).getFullName());
     }
 }

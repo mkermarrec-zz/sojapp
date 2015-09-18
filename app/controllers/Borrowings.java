@@ -8,9 +8,7 @@ import play.exceptions.TemplateNotFoundException;
 import play.mvc.With;
 
 import java.lang.reflect.Constructor;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -87,6 +85,8 @@ public class Borrowings extends CRUD {
             page = 1;
         }
         List<Model> objects = type.findPage(page, search, searchFields, orderBy, order, (String) request.args.get("where"));
+        Collections.sort(objects,
+                (b1, b2) -> ((models.Borrowing) b1).getExpectedReturnDate().compareTo(((models.Borrowing) b2).getExpectedReturnDate()));
         Long count = type.count(search, searchFields, (String) request.args.get("where"));
         Long totalCount = type.count(null, null, (String) request.args.get("where"));
         try {

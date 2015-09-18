@@ -549,3 +549,22 @@ tr.odd {
 .hasError {
     background: pink;
 }
+
+.crudReturn input {
+	color: #FFF;
+	border: none;
+	margin: 0;
+	position: absolute;
+	top: 30px;
+	right: 0;
+	background: #FF6600;
+	padding: 2px 10px;
+	font-size: 90%;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	cursor: pointer;
+}
+
+.crudReturn input:hover {
+	opacity: .7;
+}
