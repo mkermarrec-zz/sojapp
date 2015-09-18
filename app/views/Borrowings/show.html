@@ -17,12 +17,17 @@
 
     #{if !object.isArchived()}
     #{form @Borrowings.returnGame(object._key()), id:'form'}
-    <p class="crudDelete">
+    <p class="crudReturn">
         <input type="hidden" name="returnDate" id="returnDate" />
         <input type="submit" value="&{'returnGame'}"/>
     </p>
     #{/form}
     #{/if}
+    #{form @delete(object._key())}
+    <p class="crudDelete">
+        <input type="submit" value="&{'crud.delete', 'emprunt'}"/>
+    </p>
+    #{/form}
 
 </div>
 

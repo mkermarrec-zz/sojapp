@@ -10,6 +10,9 @@ import play.mvc.With;
 
 import java.io.File;
 import java.util.Base64;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 /**
  * Project: SOJ <br/>
@@ -50,5 +53,22 @@ public class Games extends CRUD {
             redirect(request.controller + ".list");
         }
         redirect(request.controller + ".show", object._key());
+    }
+
+    public static void list(int page, String search, String searchFields, String orderBy, String order) {
+        ObjectType type = ObjectType.get(getControllerClass());
+        notFoundIfNull(type);
+        if (page < 1) {
+            page = 1;
+        }
+        List<Model> objects = type.findPage(page, search, searchFields, orderBy, order, (String) request.args.get("where"));
+        Collections.sort(objects, (game1, game2) -> ((models.Game)game1).getTitle().compareTo(((models.Game) game2).getTitle()));
+        Long count = type.count(search, searchFields, (String) request.args.get("where"));
+        Long totalCount = type.count(null, null, (String) request.args.get("where"));
+        try {
+            render(type, objects, count, totalCount, page, orderBy, order);
+        } catch (TemplateNotFoundException e) {
+            render("CRUD/list.html", type, objects, count, totalCount, page, orderBy, order);
+        }
     }
 }

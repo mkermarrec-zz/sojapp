@@ -10,10 +10,18 @@
     </div>
 
     <div id="crudListTable">
-        #{crud.table fields:['game', 'player', 'returnDate'], sort:['game', 'player', 'returnDate']}
-            #{crud.custom 'returnDate'}
-            <span style="font-weight: bold;">${object.getReturnDate() ?object.getReturnDate().format('dd/MM/yyyy'):""}</span>
+        #{crud.table fields:['game', 'player', 'expectedReturnDate', 'returnDate'], sort:['game', 'player', 'expectedReturnDate', 'returnDate']}
+            #{crud.custom 'expectedReturnDate'}
+            <span style="font-weight: bold;
+            #{if object.getGame().getExpectedReturnDate().before(new Date())}
+            color: red;
+            #{/if}
+            "
+            >${object.getGame().getExpectedReturnDate() ?object.getGame().getExpectedReturnDate().format('dd/MM/yyyy'):""}</span>
             #{/crud.custom}
+        #{crud.custom 'returnDate'}
+            <span style="font-weight: bold;">${object.getReturnDate() ?object.getReturnDate().format('dd/MM/yyyy'):""}</span>
+        #{/crud.custom}
         #{/crud.table}
     </div>
 

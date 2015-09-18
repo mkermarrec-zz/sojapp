@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 import java.util.Date;
 
 @Entity
-public class Borrowing extends Model {
+public class Borrowing extends Model implements Comparable {
 
     @Required
     @ManyToOne
@@ -160,5 +160,10 @@ public class Borrowing extends Model {
         super._save();
         this.getGame().setBorrowing(this);
         this.getGame().save();
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return this.getGame().getExpectedReturnDate().compareTo(((Borrowing) o).getGame().getExpectedReturnDate());
     }
 }

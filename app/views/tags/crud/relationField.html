@@ -43,6 +43,7 @@
             #{else}
                 %{ list = _field.choices }%
             #{/else}
+            %{ Collections.sort(list) }%
             %{ list.each() { }%
             %{
                 selected = false
