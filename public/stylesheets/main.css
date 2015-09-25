@@ -417,6 +417,10 @@ form label {
     color: #444;
 }
 
+#crud #crudContent a {
+    color: #591C64;
+}
+
 tr.odd {
     background: #BECCE7 !important;
 }
