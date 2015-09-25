@@ -4,7 +4,7 @@
 
 # Home page
 GET		/admin									Admin.index
-GET		/   									Games.list
+GET		/   									Games.list(orderBy:'title', order:'ASC')
 
 ### Security
 GET     /login                                  security.Secure.login
@@ -22,6 +22,7 @@ GET     /public/                                staticDir:public
 GET		/user/show							    User.show
 POST    /user							        User.save
 
+GET		/games 									Games.list(orderBy:'title', order:'ASC')
 GET     /games/showImage  			            CachedImages.showImage
 POST    /games/cacheImage  			            CachedImages.cacheImage
 GET     /games/new                              Games.blank
@@ -33,7 +34,7 @@ GET		/game/{id}						        Game.show
 GET		/game/{id}/image    					Game.showImage
 
 DELETE  /borrowing/{id}	                        Borrowings.returnGame
-GET     /borrowings/listArchived          Borrowings.listArchived
+GET     /borrowings/listArchived                Borrowings.listArchived
 
 *       /                                       module:crud
 

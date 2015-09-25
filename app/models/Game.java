@@ -1,15 +1,14 @@
 package models;
 
-import org.apache.commons.io.FileUtils;
-import play.Logger;
 import play.Play;
 import play.data.validation.MaxSize;
 import play.data.validation.Required;
 import play.db.jpa.Model;
 
-import javax.persistence.*;
-import java.io.File;
-import java.io.IOException;
+import javax.persistence.Entity;
+import javax.persistence.Lob;
+import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;

@@ -62,7 +62,6 @@ public class Games extends CRUD {
             page = 1;
         }
         List<Model> objects = type.findPage(page, search, searchFields, orderBy, order, (String) request.args.get("where"));
-        Collections.sort(objects, (game1, game2) -> ((models.Game)game1).getTitle().compareTo(((models.Game) game2).getTitle()));
         Long count = type.count(search, searchFields, (String) request.args.get("where"));
         Long totalCount = type.count(null, null, (String) request.args.get("where"));
         try {
