@@ -8,7 +8,7 @@
 
     <h2 id="crudShowTitle">&{'crud.show.title', 'jeu'}</h2>
 
-    < class="objectForm">
+    <div class="objectForm">
         #{form action:@save(object._key()), enctype:'multipart/form-data'}
         #{crud.form fields:['title', 'boughtOn', 'price', 'description', 'nbPlayerMin', 'nbPlayerMax', 'duration',
             'picture']}
