@@ -79,7 +79,10 @@ public class Games extends CRUD {
         notFoundIfNull(object);
         try {
             models.Game game = (models.Game) object;
-            double size = game.getPicture().length / 1024;
+            double size = 0d;
+            if(game.getPicture() != null) {
+                size = game.getPicture().length / 1024;
+            }
             render(type, object, size);
         } catch (TemplateNotFoundException e) {
             render("CRUD/show.html", type, object);
