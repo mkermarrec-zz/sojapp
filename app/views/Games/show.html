@@ -8,7 +8,7 @@
 
     <h2 id="crudShowTitle">&{'crud.show.title', 'jeu'}</h2>
 
-    <div class="objectForm">
+    < class="objectForm">
         #{form action:@save(object._key()), enctype:'multipart/form-data'}
         #{crud.form fields:['title', 'boughtOn', 'price', 'description', 'nbPlayerMin', 'nbPlayerMax', 'duration',
             'picture']}
@@ -35,6 +35,7 @@
                         #{/else}
                     #{/else}
                 />
+                &{size} Kb
                 <input type="file" id="pictureFile" style="display: none;">
                 <input type="button" value="Parcourir" id="pictureButton" style="vertical-align: top;">
             #{/crud.custom}

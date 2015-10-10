@@ -1,6 +1,7 @@
 
 package controllers;
 
+import models.*;
 import org.apache.commons.io.FileUtils;
 import play.cache.Cache;
 import play.data.binding.Binder;
@@ -68,6 +69,20 @@ public class Games extends CRUD {
             render(type, objects, count, totalCount, page, orderBy, order);
         } catch (TemplateNotFoundException e) {
             render("CRUD/list.html", type, objects, count, totalCount, page, orderBy, order);
+        }
+    }
+
+    public static void show(String id) throws Exception {
+        ObjectType type = ObjectType.get(getControllerClass());
+        notFoundIfNull(type);
+        Model object = type.findById(id);
+        notFoundIfNull(object);
+        try {
+            models.Game game = (models.Game) object;
+            double size = game.getPicture().length / 1024;
+            render(type, object, size);
+        } catch (TemplateNotFoundException e) {
+            render("CRUD/show.html", type, object);
         }
     }
 }
