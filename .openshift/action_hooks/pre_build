@@ -27,7 +27,7 @@ else
 		rm $PLAY_ARCH
 	fi
 
-	PLAY_URL="http://download.playframework.org/releases/play-$VERSION.zip"
+	PLAY_URL="https://downloads.typesafe.com/play/$VERSION/play-$VERSION.zip"
 	curl -o $PLAY_ARCH $PLAY_URL
 
 	if [[ ! -f $PLAY_ARCH ]]; then
