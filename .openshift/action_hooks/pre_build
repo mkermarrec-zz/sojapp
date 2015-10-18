@@ -38,6 +38,7 @@ else
 	unzip "$PLAY_ARCH"
 	rm $PLAY_ARCH
 	mv `find ${OPENSHIFT_DATA_DIR} -type d -name "play*-$VERSION"`/ "${OPENSHIFT_DATA_DIR}${PLAY_PATH}"
+	chmod a+rx ${OPENSHIFT_DATA_DIR}${PLAY_PATH}play
 
 	PLAY_FULL_PATH="${OPENSHIFT_DATA_DIR}${PLAY_PATH}"
 
