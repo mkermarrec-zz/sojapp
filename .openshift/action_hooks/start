@@ -42,6 +42,10 @@ if [[ ! $? -eq 0 ]]; then
 fi
 
 export PLAY_LOG_PATH=${OPENSHIFT_LOG_DIR}
+
+export JAVA_HOME="$OPENSHIFT_DATA_DIR/jdk/jdk1.8.0_05"
+export PATH=$OPENSHIFT_DATA_DIR/jdk1.8.0_05/bin:$PATH
+
 echo "$PLAY_COMMAND start --%$ID $PLAY_PARAMS" >> $LOG_FILE
 nohup bash -c "$PLAY_COMMAND start --%$ID $PLAY_PARAMS &> $LOG_FILE" &> /dev/null &
 
