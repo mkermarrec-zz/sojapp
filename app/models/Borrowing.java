@@ -2,6 +2,7 @@ package models;
 
 import controllers.CRUD;
 import org.apache.commons.lang.time.DateUtils;
+import play.Play;
 import play.data.validation.MaxSize;
 import play.data.validation.Required;
 import play.db.jpa.Model;
@@ -13,6 +14,8 @@ import java.util.Date;
 
 @Entity
 public class Borrowing extends Model implements Comparable {
+
+    private static final int DAYS = Integer.valueOf(Play.configuration.getProperty("borrowing.days"));
 
     @Required
     @ManyToOne
@@ -75,7 +78,7 @@ public class Borrowing extends Model implements Comparable {
      * @return the borrowingDate
      */
     public Date getExpectedReturnDate() {
-        return DateUtils.addWeeks(borrowingDate, 3);
+        return DateUtils.addDays(borrowingDate, DAYS);
     }
 
     /**
