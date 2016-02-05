@@ -102,3 +102,5 @@ userEmailOk=Votre email a bien été enregistré
 secure.title=Connexion
 loginLoggedOutMessage=Vous avez été déconnecté avec succès
 loginTimeoutMessage=Votre session a expiré
+
+fullName=Nom
