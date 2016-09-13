@@ -1,6 +1,8 @@
 
 package models;
 
+import org.apache.commons.lang.time.DateUtils;
+import play.Play;
 import play.data.validation.Email;
 import play.data.validation.Password;
 import play.data.validation.Required;
@@ -9,9 +11,10 @@ import play.libs.Crypto;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Transient;
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
@@ -25,6 +28,11 @@ import java.util.List;
  */
 @Entity
 public class User extends Model implements Comparable {
+
+    @Transient
+    private static final int NEW_SEASON_DAY = Integer.parseInt((Play.configuration.getProperty("new.season.day")));
+    @Transient
+    private static final int NEW_SEASON_MONTH = Integer.parseInt(Play.configuration.getProperty("new.season.month"));
 
     @Required
     private String firstName;
@@ -113,7 +121,7 @@ public class User extends Model implements Comparable {
             this.password = password;
             passwordHasChanged = true;
         } else {
-            if(!this.password.equals(password)) {
+            if (!this.password.equals(password)) {
                 this.password = password;
                 passwordHasChanged = true;
             }
@@ -175,6 +183,27 @@ public class User extends Model implements Comparable {
 
     public void setBorrowings(List<Borrowing> borrowings) {
         this.borrowings = borrowings;
+    }
+
+    public boolean isCotisationDatePassed() {
+        Date seasonBeginDate, seasonEndDate ;
+        boolean result = true;
+
+        Date newSeasonDate = new GregorianCalendar(LocalDate.now().getYear(), NEW_SEASON_MONTH, NEW_SEASON_DAY).getTime();
+
+        if(newSeasonDate.after(new Date())) {
+            // if today is after new season date
+            seasonBeginDate = new GregorianCalendar(LocalDate.now().getYear() - 1, NEW_SEASON_MONTH, NEW_SEASON_DAY).getTime();
+            seasonEndDate = newSeasonDate;
+        }else {
+            seasonBeginDate = newSeasonDate;
+            seasonEndDate = new GregorianCalendar(LocalDate.now().getYear() + 1, NEW_SEASON_MONTH, NEW_SEASON_DAY).getTime();
+        }
+
+        if (cotisationDate != null && seasonBeginDate.before(cotisationDate) && seasonEndDate.after(cotisationDate)) {
+            result = false;
+        }
+        return result;
     }
 
     /**

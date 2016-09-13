@@ -10,7 +10,16 @@
     </div>
 
     <div id="crudListTable">
-        #{crud.table fields:['firstName', 'lastName'], sort:['firstName', 'lastName'] /}
+        #{crud.table fields:['firstName', 'lastName', 'cotisationDate'], sort:['firstName', 'lastName', 'cotisationDate']}
+        #{crud.custom 'cotisationDate'}
+            <span style="font-weight: bold;
+            #{if object.isCotisationDatePassed()}
+            color: red;
+            #{/if}
+            "
+            >${object.getCotisationDate() ?object.getCotisationDate().format('dd/MM/yyyy'):""}</span>
+        #{/crud.custom}
+        #{/crud.table}
     </div>
 
     <div id="crudListPagination">
