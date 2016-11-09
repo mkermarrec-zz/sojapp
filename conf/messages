@@ -55,6 +55,7 @@ login=Identifiant
 password=Mot de passe
 cotisationDate=Dernière cotisation
 guarantee=Montant de la caution
+guaranteeDate=Date de la caution
 admin=Administrateur?
 
 

@@ -10,7 +10,7 @@
     </div>
 
     <div id="crudListTable">
-        #{crud.table fields:['firstName', 'lastName', 'cotisationDate'], sort:['firstName', 'lastName', 'cotisationDate']}
+        #{crud.table fields:['firstName', 'lastName', 'cotisationDate', 'guaranteeDate'], sort:['firstName', 'lastName', 'cotisationDate', 'guaranteeDate']}
         #{crud.custom 'cotisationDate'}
             <span style="font-weight: bold;
             #{if object.isCotisationDatePassed()}
@@ -18,6 +18,14 @@
             #{/if}
             "
             >${object.getCotisationDate() ?object.getCotisationDate().format('dd/MM/yyyy'):""}</span>
+        #{/crud.custom}
+        #{crud.custom 'guaranteeDate'}
+        <span style="font-weight: bold;
+            #{if object.isGuaranteeDatePassed()}
+            color: red;
+            #{/if}
+            "
+        >${object.getGuaranteeDate() ?object.getGuaranteeDate().format('dd/MM/yyyy'):""}</span>
         #{/crud.custom}
         #{/crud.table}
     </div>

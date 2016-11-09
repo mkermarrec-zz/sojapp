@@ -2,6 +2,8 @@
 package models;
 
 import org.apache.commons.lang.time.DateUtils;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeUtils;
 import play.Play;
 import play.data.validation.Email;
 import play.data.validation.Password;
@@ -53,6 +55,8 @@ public class User extends Model implements Comparable {
     private Date cotisationDate;
 
     private double guarantee;
+
+    private Date guaranteeDate;
 
     private boolean admin;
 
@@ -177,6 +181,14 @@ public class User extends Model implements Comparable {
         this.guarantee = guarantee;
     }
 
+    public Date getGuaranteeDate() {
+        return guaranteeDate;
+    }
+
+    public void setGuaranteeDate(Date guaranteeDate) {
+        this.guaranteeDate = guaranteeDate;
+    }
+
     public List<Borrowing> getBorrowings() {
         return borrowings;
     }
@@ -203,6 +215,21 @@ public class User extends Model implements Comparable {
         if (cotisationDate != null && seasonBeginDate.before(cotisationDate) && seasonEndDate.after(cotisationDate)) {
             result = false;
         }
+        return result;
+    }
+
+    public boolean isGuaranteeDatePassed() {
+        Date guaranteeEndDate;
+        boolean result = false;
+
+        if(guaranteeDate != null) {
+            guaranteeEndDate = DateUtils.addYears(guaranteeDate, 1);
+
+            if(guaranteeEndDate.before(new Date())) {
+                result = true;
+            }
+        }
+
         return result;
     }
 
